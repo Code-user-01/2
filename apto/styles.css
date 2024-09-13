@@ -490,6 +490,7 @@ input:focus, textarea:focus {
         left: 0;
         padding: 10px 0;
         transition: max-height 0.3s ease-out;
+        overflow-y: auto; /* Agrega scroll si el contenido es mayor que el viewport */
     }
 
     header nav a {
@@ -515,7 +516,7 @@ input:focus, textarea:focus {
 
     header nav.active {
         display: flex;
-        max-height: 300px;
+        max-height: 400px;
     }
 
     .slider .container {
