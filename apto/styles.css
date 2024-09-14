@@ -288,28 +288,32 @@ header nav a:hover {
     pointer-events: none; /* El botón no intercepta los clics, solo el video */
 }
 
-/* Ocultar los controles del video predeterminados del navegador */
-.gallery video::-webkit-media-controls,
-.gallery video::-moz-media-controls,
-.gallery video::-ms-media-controls {
-    display: none !important; /* Oculta todos los controles del navegador */
-}
+
 
 /* Responsividad de la galería */
-@media (max-width: 768px) {
+@media (min-width: 1200px) {
     .gallery {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Ajusta el tamaño de las columnas para pantallas más pequeñas */
-        gap: 15px; /* Reduce el espacio entre elementos en pantallas más pequeñas */
+        grid-template-columns: repeat(4, 1fr); /* 4 columnas para pantallas grandes */
     }
 }
 
-@media (max-width: 480px) {
+@media (min-width: 992px) and (max-width: 1199px) {
     .gallery {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Ajusta el tamaño para pantallas muy pequeñas */
-        gap: 10px; /* Más pequeño aún para dispositivos móviles */
+        grid-template-columns: repeat(3, 1fr); /* 3 columnas para pantallas medianas */
     }
 }
 
+@media (min-width: 768px) and (max-width: 991px) {
+    .gallery {
+        grid-template-columns: repeat(2, 1fr); /* 2 columnas para pantallas más pequeñas */
+    }
+}
+
+@media (max-width: 767px) {
+    .gallery {
+        grid-template-columns: repeat(1, 1fr); /* 1 columna para pantallas muy pequeñas */
+    }
+}
 /* Estilos adicionales para el texto */
 .gallery-caption {
     text-align: center; /* Centra el texto */
@@ -326,71 +330,9 @@ header nav a:hover {
     display: none; /* Elimina el modal del flujo de la página */
 }
 
-/* Estilos mejorados para el video en pantalla completa */
-.gallery video:fullscreen {
-    width: 100vw; /* Ocupa todo el ancho de la pantalla */
-    height: 100vh; /* Ocupa todo el alto de la pantalla */
-    object-fit: contain; /* Mantiene la proporción del video sin recortar */
-    border-radius: 0; /* Elimina los bordes redondeados en modo pantalla completa */
-    background-color: #000; /* Fondo negro para videos en pantalla completa */
-}
 
-/* Estilos específicos para navegadores con prefijos */
-.gallery video:-webkit-full-screen {
-    width: 100vw;
-    height: 100vh;
-    object-fit: contain;
-    border-radius: 0;
-    background-color: #000;
-}
 
-.gallery video:-moz-full-screen {
-    width: 100vw;
-    height: 100vh;
-    object-fit: contain;
-    border-radius: 0;
-    background-color: #000;
-}
 
-.gallery video:-ms-fullscreen {
-    width: 100vw;
-    height: 100vh;
-    object-fit: contain;
-    border-radius: 0;
-    background-color: #000;
-}
-
-/* Mostrar controles multimedia en pantalla completa */
-.gallery video::-webkit-media-controls,
-.gallery video::-moz-media-controls,
-.gallery video::-ms-media-controls {
-    display: block !important; /* Asegura que los controles multimedia se muestren correctamente */
-    opacity: 1; /* Asegura que los controles sean visibles */
-    transition: opacity 0.3s ease; /* Transición suave para los controles */
-}
-
-/* Efecto de hover para mejorar la visibilidad de los controles */
-.gallery video:hover::-webkit-media-controls {
-    opacity: 1; /* Asegura que los controles sean totalmente visibles al pasar el ratón */
-}
-
-/* Asegura que los controles siempre se vean cuando se necesiten */
-.gallery video:fullscreen::cue {
-    display: block;
-}
-
-/* Ocultar el botón de descarga del video en navegadores basados en WebKit */
-.gallery video::-webkit-media-controls-enclosure {
-    overflow: hidden;
-}
-
-.gallery video::-webkit-media-controls-panel {
-    display: flex !important; /* Asegura que solo los controles principales sean visibles */
-}
-
-.gallery video::-webkit-media-controls-download-button {
-    display: none !important; /* Oculta el botón de descarga específico */
-}
 
 
 
@@ -663,12 +605,7 @@ input:focus, textarea:focus {
 }
 
 
-/* Aplica viñetas a los cuadros de requisitos */
-.list-bullets {
-    list-style-type: disc; /* Añade viñetas */
-    padding-left: 20px; /* Añade espacio para las viñetas */
-    margin: 0;
-}
+
 
 /* Ajusta el contenedor de los requisitos */
 .flex-container {
