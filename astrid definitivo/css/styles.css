@@ -1,0 +1,1407 @@
+:root {
+    --primary-color: #333;
+    --background-color: #000000; /* Cambiar el color de fondo a negro */
+    --secondary-bg-color: #f7f7f7;
+    --text-color: #ffffff;
+    --secondary-text-color: #666;
+    --btn-bg-color: #000;
+    --btn-hover-color: #444444c0;
+    --hero-bg-color: #222;
+    --footer-bg-color: #000000; /* Cambié el color de fondo del footer para que sea blanco */
+    --section-padding: 100px;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* CSS General para todas las secciones */
+section {
+    min-height: 100vh; /* Hace que cada sección ocupe al menos una pantalla completa */
+    display: flex;
+    align-items: center; /* Centra el contenido verticalmente */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    padding: var(--section-padding) 0; /* Mantiene el padding superior e inferior */
+}
+
+.navbar {
+    padding: 1rem;
+    background-color: var(--background-color);
+    border-bottom: 1px solid #e7e7e7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-right: auto;
+}
+
+/* Botón hamburguesa */
+.navbar-toggler {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.navbar-toggler-icon {
+    width: 25px;
+    height: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.navbar-toggler-icon .line {
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+/* Animación para formar la "X" al abrir */
+.navbar-toggler.open .line:nth-child(1) {
+    transform: rotate(45deg);
+    position: absolute;
+    top: 50%;
+}
+
+.navbar-toggler.open .line:nth-child(2) {
+    opacity: 0;
+}
+
+.navbar-toggler.open .line:nth-child(3) {
+    transform: rotate(-45deg);
+    position: absolute;
+    top: 50%;
+}
+
+/* Mejora visual en la transición */
+.navbar-toggler-icon .line {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+
+/***********************************************************************************************************/
+
+/* Ajustes generales para la sección hero */
+.hero {
+    background: linear-gradient(135deg, #000000, #4b276f, #000000, #4b276f);
+    background-size: 200% 200%;
+    animation: backgroundGradientAnimationHero 15s ease infinite;
+}
+
+@keyframes backgroundGradientAnimationHero {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.hero .text-content {
+    max-width: 500px;
+    text-align: center;
+    margin: 20px 0;
+    flex: 1 1 auto;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    animation: fadeInDown 1s ease-out;
+    color: #ffffff; /* Texto blanco para mayor contraste */
+}
+
+.hero p {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    animation: fadeIn 1.5s ease-out;
+    color: #e0e0e0; /* Gris claro para subtítulos */
+}
+
+/* Botón con neumorfismo */
+.hero .btn-primary {
+    background: #00e5ff; /* Cian brillante para un buen contraste */
+    color: #000; /* Texto negro para mejor legibilidad */
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.5), -8px -8px 15px rgba(255, 255, 255, 0.1); /* Sombra de neumorfismo */
+}
+
+.hero .btn-primary:hover {
+    background: #00c0e1; /* Ligeramente más oscuro al hacer hover */
+    transform: scale(1.05);
+    box-shadow: inset 8px 8px 15px rgba(0, 0, 0, 0.5), inset -8px -8px 15px rgba(255, 255, 255, 0.1); /* Efecto de presionado */
+}
+
+/* Contenedor de la imagen y círculo */
+.hero .circle-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    flex: 1 1 auto;
+}
+
+/* Círculo neumórfico */
+.hero .circle-background {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 500px;
+    height: 500px;
+    background: #8e44ad; /* Lila fuerte */
+    border-radius: 50%;
+    z-index: 0;
+    transform: translate(-50%, -50%) rotate(0deg);
+    box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.4), -15px -15px 30px rgba(255, 255, 255, 0.1); /* Sombra de neumorfismo */
+    opacity: 0.85;
+    animation: moveCircle 10s infinite alternate ease-in-out, rotateCircle 20s linear infinite, pulseCircle 6s infinite ease-in-out;
+}
+
+/* Imagen en la sección hero */
+.hero img {
+    max-width: 100%;
+    border-radius: 50%;
+    position: relative;
+    z-index: 1;
+    width: 400px;
+    height: auto;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    transition: transform 0.6s ease-in-out, box-shadow 0.6s ease-in-out;
+    margin-top: 20px;
+}
+
+.hero img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Efecto de animación del círculo */
+@keyframes moveCircle {
+    0% {
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    }
+    20% {
+        transform: translate(-45%, -55%) scale(1.05) rotate(15deg);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.1) rotate(30deg);
+    }
+    80% {
+        transform: translate(-55%, -45%) scale(1.05) rotate(15deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    }
+}
+
+/* Media queries para pantallas pequeñas */
+@media (max-width: 1024px) {
+    .hero {
+        flex-direction: column;
+        padding: 20px;
+        text-align: center;
+        min-height: 90vh;
+    }
+
+    .hero .text-content {
+        max-width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .hero .btn-primary {
+        padding: 0.5rem 1.5rem;
+        font-size: 0.9rem;
+    }
+
+    .hero .circle-container {
+        max-width: 100%;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .hero .circle-background {
+        width: 220px;
+        height: 220px;
+        transform: translate(-50%, 10%) rotate(0deg);
+        animation: moveCircle 12s infinite alternate ease-in-out, rotateCircle 24s linear infinite, pulseCircle 8s infinite ease-in-out;
+    }
+
+    .hero img {
+        width: 200px;
+        position: relative;
+        z-index: 1;
+    }
+}
+
+
+/****************************************************************************************************/
+
+/* Estilo mejorado para la sección Sobre mí */
+#sobre-mi {
+    font-family: 'Roboto', Arial, sans-serif;
+    background: linear-gradient(135deg, #000000, #4b276f, #000000, #4b276f); /* Colores y dirección actualizados */
+    background-size: 200% 200%; /* Tamaño del gradiente igual al de la sección hero */
+    padding: var(--section-padding) 20px;
+    animation: backgroundGradientAnimationHero 15s ease infinite; /* Misma animación y duración que en la sección hero */
+}
+
+/* Reutilización de la animación de la sección hero */
+@keyframes backgroundGradientAnimationHero {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Responsividad para pantallas medianas */
+@media (max-width: 1024px) {
+    #sobre-mi {
+        padding: 80px 20px;
+        background-size: 200% 200%;
+    }
+}
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 768px) {
+    #sobre-mi {
+        padding: 60px 10px;
+        background-size: 200% 200%;
+    }
+}
+
+
+    
+    #sobre-mi .section-title {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #fff;
+        margin-bottom: 10px;
+        font-family: 'Great Vibes', cursive;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        animation: fadeInTitle 1.5s ease-in-out;
+    }
+    
+    #sobre-mi .subtitle {
+        font-size: 2rem;
+        font-style: italic;
+        font-weight: 300;
+        color: #fff;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    }
+    
+    #sobre-mi .description {
+        font-size: 1.125rem;
+        color: #f1f1f1;
+        line-height: 1.8;
+        margin-bottom: 20px;
+        text-align: justify;
+    }
+    
+    #sobre-mi .sobre-mi-img-modern {
+        max-width: 300px;
+        border-radius: 8px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        border: 5px solid #fff;
+    }
+    
+    #sobre-mi .contact-info {
+        font-size: 1rem;
+        color: #fff;
+    }
+    
+    #sobre-mi .contact-info a {
+        color: #fff;
+        text-decoration: underline;
+        font-weight: bold;
+        transition: color 0.3s ease;
+    }
+    
+    #sobre-mi .contact-info a:hover {
+        color: #ffb6c1;
+    }
+    
+    @keyframes fadeInTitle {
+        0% { opacity: 0; transform: translateY(-20px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+    /* Ajustes para dispositivos móviles */
+@media (max-width: 768px) {
+    #sobre-mi .text-with-image {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    #sobre-mi .sobre-mi-img-modern {
+        margin-bottom: 20px;
+        float: none;
+    }
+
+    #sobre-mi .description {
+        text-align: center;
+    }
+}
+
+.contact-info {
+    display: flex;
+    justify-content: center;  /* Centrar los íconos horizontalmente */
+    gap: 30px;  /* Espaciado uniforme entre los íconos */
+    padding: 20px 0;  /* Añadir algo de espacio alrededor */
+}
+
+.contact-info a i {
+    font-size: 1.5rem;  /* Tamaño del ícono */
+    padding: 20px;  /* Espacio alrededor para crear el círculo más grande */
+    border-radius: 50%;  /* Mantiene la forma circular */
+    background-color: #e0e0e0;  /* Fondo gris claro */
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.4),  /* Sombra más fuerte hacia abajo */
+                -5px -5px 15px rgba(255, 255, 255, 0.1);  /* Luz suave hacia arriba */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;  /* Transiciones suaves */
+}
+
+.contact-info a:hover i {
+    transform: scale(1.1);  /* Aumenta ligeramente el tamaño del círculo e ícono al hacer hover */
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.6),  /* Sombra más pronunciada hacia abajo */
+                -5px -5px 20px rgba(255, 255, 255, 0.05);  /* Luz más tenue */
+    background-color: #f0f0f0;  /* Fondo más claro al hacer hover */
+}
+
+/* Estilos por plataforma */
+
+/* WhatsApp */
+.contact-info a[href*="wa.me"] i {
+    background-color: #25D366;  /* Verde oficial de WhatsApp */
+    color: #fff;  /* Color del ícono */
+}
+.contact-info a[href*="wa.me"]:hover i {
+    background-color: #1EBE52;  /* Verde más oscuro al hacer hover */
+}
+
+/* Gmail */
+.contact-info a[href*="mail.google.com"] i {
+    background-color: #D44638;  /* Rojo oficial de Gmail */
+    color: #fff;
+}
+.contact-info a[href*="mail.google.com"]:hover i {
+    background-color: #B23121;  /* Rojo más oscuro al hacer hover */
+}
+
+/* LinkedIn */
+.contact-info a[href*="linkedin.com"] i {
+    background-color: #0077B5;  /* Azul oficial de LinkedIn */
+    color: #fff;
+}
+.contact-info a[href*="linkedin.com"]:hover i {
+    background-color: #005582;  /* Azul más oscuro al hacer hover */
+}
+
+    
+/********************************************************************/
+
+
+/* Sección general de habilidades */
+.skills-section {
+    background: linear-gradient(135deg, #000000, #4b276f, #000000, #4b276f);
+    background-size: 200% 200%;
+    padding: 100px 0; /* Aumenta el padding para dar más espacio */
+    color: #fff;
+    animation: backgroundGradientAnimation 15s ease infinite;
+}
+
+/* Animación para el fondo de la sección */
+@keyframes backgroundGradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Responsividad para pantallas medianas */
+@media (max-width: 1024px) {
+    .skills-section {
+        padding: 80px 20px; /* Reducir el padding para pantallas medianas */
+        background-size: 250% 250%; /* Hacer que el fondo se vea más dinámico en pantallas medianas */
+    }
+
+    .skills-section .col-md-4 {
+        flex: 1 1 calc(50% - 20px); /* Dos tarjetas por fila en pantallas medianas */
+        max-width: calc(50% - 20px);
+    }
+}
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 768px) {
+    .skills-section {
+        padding: 60px 10px; /* Reducir el padding para pantallas pequeñas */
+        background-size: 300% 300%; /* Aumentar el movimiento del fondo para que se vea mejor en pantallas pequeñas */
+    }
+
+    .skills-section .col-md-4 {
+        flex: 1 1 100%; /* Una tarjeta por fila en pantallas pequeñas */
+        max-width: 100%;
+        margin-bottom: 20px; /* Añadir más margen entre las tarjetas */
+    }
+
+    .skills-section h3 {
+        font-size: 1.2rem; /* Reducir el tamaño de los títulos para pantallas pequeñas */
+    }
+
+    .skills-section p {
+        font-size: 0.9rem; /* Reducir el tamaño del texto para pantallas pequeñas */
+    }
+}
+
+.skills-section .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px; /* Añade un espacio entre columnas y filas */
+    justify-content: center; /* Centra las tarjetas si hay menos de 3 en la última fila */
+}
+
+.skills-section .col-md-4 {
+    margin-bottom: 50px; /* Aumenta el margen inferior para separar más las tarjetas */
+    padding: 20px;
+    background: linear-gradient(135deg, #00e5ff, #6c3483); /* Degradado azul y morado */
+    background-size: 200% 200%;
+    border-radius: 15px;
+    box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.5), -8px -8px 15px rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex: 1 1 calc(33.333% - 30px); /* Tres tarjetas por fila en pantallas grandes */
+    max-width: calc(33.333% - 30px); /* Ajusta la anchura para dar más separación */
+    animation: gradientAnimation 6s ease infinite;
+}
+
+.skills-section .col-md-4:hover {
+    transform: translateY(-5px);
+    box-shadow: 12px 12px 25px rgba(0, 0, 0, 0.5), -12px -12px 25px rgba(255, 255, 255, 0.1);
+}
+
+/* Centrar la última tarjeta cuando está sola en la última fila */
+.skills-section .col-md-4:nth-last-child(-n+2):nth-child(odd) {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Responsividad para pantallas medianas: dos tarjetas por fila */
+@media (max-width: 1024px) {
+    .skills-section .col-md-4 {
+        flex: 1 1 calc(50% - 30px); /* Dos tarjetas por fila en pantallas medianas */
+        max-width: calc(50% - 30px);
+    }
+}
+
+/* Responsividad para pantallas pequeñas: una tarjeta por fila */
+@media (max-width: 768px) {
+    .skills-section .col-md-4 {
+        flex: 1 1 100%; /* Una tarjeta por fila en pantallas pequeñas */
+        max-width: 100%;
+        margin-bottom: 30px; /* Añadir más margen entre las tarjetas */
+    }
+}
+
+.skills-section h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #ffffff;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.skills-section p {
+    font-size: 1rem;
+    color: #f1f1f1;
+    line-height: 1.6;
+}
+
+/* Animación para el gradiente de fondo */
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+
+/********************************************************/
+
+/* Estilo mejorado para la sección de Experiencia Profesional */
+#experiencia-profesional {
+    font-family: 'Roboto', Arial, sans-serif;
+    background: linear-gradient(135deg, #000000, #4b276f, #000000, #4b276f); /* Colores y dirección actualizados */
+    background-size: 200% 200%; /* Mismo tamaño de gradiente que en la sección hero */
+    padding: var(--section-padding) 20px;
+    animation: backgroundGradientAnimationHero 15s ease infinite; /* Misma animación y duración que en la sección hero */
+}
+
+/* Reutilización de la animación de la sección hero */
+@keyframes backgroundGradientAnimationHero {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Responsividad para pantallas medianas */
+@media (max-width: 1024px) {
+    #experiencia-profesional {
+        padding: 80px 20px;
+        background-size: 200% 200%;
+    }
+}
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 768px) {
+    #experiencia-profesional {
+        padding: 60px 10px;
+        background-size: 200% 200%;
+    }
+}
+
+
+#experiencia-profesional .section-title {
+    color: #8e44ad; /* Naranja cálido para destacar el título */
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+#experiencia-profesional .experience-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+#experiencia-profesional .experience-item {
+    background: linear-gradient(135deg, #00e5ff, #6c3483); /* Degradado azul y morado */
+    background-size: 200% 200%;
+    padding: 25px;
+    border-radius: 15px;
+    border: 1px solid transparent;
+    box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.5), -8px -8px 15px rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    animation: gradientAnimation 6s ease infinite; /* Animación del gradiente */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+#experiencia-profesional .experience-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 12px 12px 25px rgba(0, 0, 0, 0.5), -12px -12px 25px rgba(255, 255, 255, 0.1);
+}
+
+/* Animación del gradiente */
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+
+#experiencia-profesional .experience-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+#experiencia-profesional .experience-header h3 {
+    color: inherit; /* Cambia según el color de fondo */
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+#experiencia-profesional .experience-header .years {
+    font-size: 1rem;
+    color: inherit; /* Cambia según el color de fondo */
+    font-weight: normal;
+}
+
+#experiencia-profesional .role {
+    font-style: italic;
+    color: #8e44ad; /* Naranja cálido para destacar el rol */
+    margin-bottom: 15px;
+    transition: color 0.3s ease;
+}
+
+#experiencia-profesional .experience-item:hover .role {
+    color: #ffffff; /* Cambia a blanco al pasar el mouse */
+}
+
+#experiencia-profesional .experience-details {
+    list-style-type: none; /* Sin viñetas */
+    margin-left: 0;
+    padding-left: 20px;
+    position: relative;
+    color: inherit; /* Cambia según el color de fondo */
+}
+
+#experiencia-profesional .experience-details li {
+    margin-bottom: 10px;
+    line-height: 1.6;
+    position: relative;
+    padding-left: 25px;
+    transition: color 0.3s ease;
+}
+
+#experiencia-profesional .experience-details li::before {
+    content: "\2022"; /* Punto personalizado */
+    position: absolute;
+    left: 0;
+    color: #ff7ea8; /* Color rosa para el punto */
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+#experiencia-profesional .experience-item:hover .experience-details li::before {
+    color: #ffffff; /* Cambia a blanco al pasar el mouse */
+}
+
+/* Herramientas de Enseñanza, Idiomas, Educación y Desarrollo Profesional */
+#experiencia-profesional .subsection-title {
+    color: #8e44ad; /* Mantener consistencia con los otros títulos de sección */
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    text-align: center;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    border-bottom: 2px solid #ff7ea8; /* Borde inferior en color rosa */
+    padding-bottom: 10px;
+}
+
+/* Ajustes para la última tarjeta en filas incompletas */
+#experiencia-profesional .experience-item:nth-last-child(1):nth-child(odd),
+#experiencia-profesional .experience-item:nth-last-child(2):nth-child(odd) {
+    grid-column: span 3; /* La última tarjeta ocupará el ancho de tres tarjetas si hay un solo espacio libre */
+}
+
+@media (max-width: 1024px) {
+    #experiencia-profesional .experience-item:nth-last-child(1):nth-child(odd),
+    #experiencia-profesional .experience-item:nth-last-child(2):nth-child(odd) {
+        grid-column: span 2; /* En pantallas medianas, ocupará el ancho de dos tarjetas si hay un solo espacio libre */
+    }
+}
+
+@media (max-width: 768px) {
+    #experiencia-profesional .experience-item:nth-last-child(1):nth-child(odd),
+    #experiencia-profesional .experience-item:nth-last-child(2):nth-child(odd) {
+        grid-column: span 1; /* En pantallas pequeñas, vuelve a ocupar el ancho de una sola tarjeta */
+    }
+}
+
+
+
+/* Posicionar las fechas al final de cada tarjeta de experiencia */
+.experience-item {
+    position: relative;
+    padding-bottom: 40px;
+}
+
+.experience-header .years {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    font-size: 1rem;
+    color: #8e44ad;
+}
+
+
+/********************************************************************/
+
+
+
+/* Estilo coherente con el resto de la página para la sección de educación */
+.education-section-unique {
+    background: linear-gradient(135deg, #000000, #4b276f, #000000, #4b276f);
+    background-size: 200% 200%;
+    padding: 100px 0;
+    color: #fff;
+    animation: backgroundGradientAnimation 15s ease infinite;
+}
+
+/* Manteniendo las sombras y bordes redondeados */
+.container-unique {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.5), -8px -8px 15px rgba(255, 255, 255, 0.1);
+}
+
+/* Título estilizado acorde al resto */
+.subsection-title-unique {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 30px;
+    text-align: center;
+    font-family: 'Great Vibes', cursive;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    animation: fadeInTitle 1.5s ease-in-out;
+}
+
+/* Estilo de las listas dentro de la sección */
+.education-unique li, .professional-development-unique li {
+    font-size: 1.125rem;
+    color: #f1f1f1;
+    line-height: 1.8;
+    margin-bottom: 15px;
+    padding-left: 20px;
+    position: relative;
+}
+
+/* Íconos similares a otras secciones */
+.education-unique li::before, .professional-development-unique li::before {
+    content: "\2022";
+    position: absolute;
+    left: 0;
+    color: #ff7ea8;
+    font-size: 1.5rem;
+}
+
+/* Responsividad para pantallas medianas (tablets, 1024px o menos) */
+@media (max-width: 1024px) {
+    .education-section-unique {
+        padding: 80px 20px; /* Reducir padding en pantallas medianas */
+        background-size: 250% 250%; /* Hacer que el fondo se vea más dinámico */
+    }
+
+    .subsection-title-unique {
+        font-size: 2rem; /* Reducir el tamaño del título en pantallas medianas */
+    }
+
+    .container-unique {
+        padding: 30px; /* Reducir padding dentro del contenedor */
+    }
+
+    .education-unique li, .professional-development-unique li {
+        font-size: 1rem; /* Reducir ligeramente el tamaño de las listas */
+    }
+}
+
+/* Responsividad para pantallas pequeñas (móviles, 768px o menos) */
+@media (max-width: 768px) {
+    .education-section-unique {
+        padding: 60px 10px; /* Reducir padding en pantallas pequeñas */
+        background-size: 300% 300%; /* Aumentar movimiento del fondo */
+    }
+
+    .subsection-title-unique {
+        font-size: 1.8rem; /* Reducir tamaño del título en pantallas pequeñas */
+        margin-bottom: 20px; /* Ajustar margen inferior */
+    }
+
+    .container-unique {
+        padding: 20px; /* Reducir padding en el contenedor */
+        box-shadow: none; /* Simplificar el diseño en pantallas pequeñas */
+    }
+
+    .education-unique li, .professional-development-unique li {
+        font-size: 0.9rem; /* Reducir el tamaño del texto en las listas */
+        padding-left: 15px; /* Ajustar padding en las listas */
+    }
+
+    .education-unique li::before, .professional-development-unique li::before {
+        font-size: 1.2rem; /* Reducir tamaño del ícono */
+    }
+}
+
+
+/* Estilo de la galería de certificados */
+.certificate-slider-unique {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    height: 500px; /* Fijamos una altura adecuada para que las imágenes quepan bien */
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.certificate-unique {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform: scale(0.9);
+    width: 100%;
+    height: 100%;
+}
+
+.certificate-unique.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.certificate-unique img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Mantiene la imagen dentro del contenedor sin deformarla */
+}
+
+/* Botones de navegación */
+.certificate-controls {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.certificate-controls button {
+    background-color: #8e44ad;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 0 10px;
+    transition: background-color 0.3s ease;
+}
+
+.certificate-controls button:hover {
+    background-color: #0056b3;
+}
+
+
+
+
+
+
+/******************************************************************/
+
+
+/* Estilo mejorado para la sección de Teaching Philosophy */
+.teaching-philosophy-section {
+    font-family: 'Roboto', Arial, sans-serif;
+    background: linear-gradient(135deg, #000000, #4b276f, #000000, #4b276f); /* Colores y dirección actualizados */
+    background-size: 200% 200%; /* Tamaño del gradiente igual al de la sección hero */
+    padding: 100px 20px;
+    color: #fff;
+    animation: backgroundGradientAnimationHero 15s ease infinite; /* Misma animación y duración que en la sección hero */
+}
+
+/* Reutilización de la animación de la sección hero */
+@keyframes backgroundGradientAnimationHero {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.teaching-philosophy-container {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.5), -8px -8px 15px rgba(255, 255, 255, 0.1);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.teaching-philosophy-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 30px;
+    font-family: 'Great Vibes', cursive;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    animation: fadeInTitle 1.5s ease-in-out;
+}
+
+.teaching-philosophy-text {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: #f1f1f1;
+    text-align: justify;
+    margin-bottom: 30px;
+}
+
+.teaching-philosophy-quote {
+    font-size: 1.25rem;
+    font-style: italic;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #ff7ea8;
+}
+
+.teaching-philosophy-img {
+    max-width: 100%;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsividad para pantallas medianas */
+@media (max-width: 1024px) {
+    .teaching-philosophy-container {
+        padding: 30px;
+    }
+
+    .teaching-philosophy-title {
+        font-size: 2rem;
+    }
+
+    .teaching-philosophy-text {
+        font-size: 1rem;
+    }
+
+    .teaching-philosophy-section {
+        background-size: 200% 200%; /* Mismo tamaño que en la sección hero */
+    }
+}
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 768px) {
+    .teaching-philosophy-container {
+        padding: 20px;
+    }
+
+    .teaching-philosophy-title {
+        font-size: 1.8rem;
+    }
+
+    .teaching-philosophy-text {
+        font-size: 0.9rem;
+    }
+
+    .teaching-philosophy-quote {
+        font-size: 1.1rem;
+    }
+
+    .teaching-philosophy-section {
+        background-size: 200% 200%; /* Mismo tamaño que en la sección hero */
+    }
+}
+
+/* Ajustes para animación de título */
+@keyframes fadeInTitle {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+
+
+/*******************************************************************/
+
+
+
+/* Estilo coherente con el resto de la página para la sección de Intermediate/Phase 2-3 */
+.intermediate-section {
+    background: linear-gradient(135deg, #000000, #4b276f); /* Fondo coherente con el resto */
+    background-size: 200% 200%;
+    padding: 100px 0;
+    color: #fff;
+    animation: backgroundGradientAnimation 15s ease infinite;
+}
+
+.intermediate-container {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.5), -8px -8px 15px rgba(255, 255, 255, 0.1);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.intermediate-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 30px;
+    font-family: 'Great Vibes', cursive;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.intermediate-text {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: #f1f1f1;
+    text-align: justify;
+    margin-bottom: 30px;
+}
+
+.intermediate-subtitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #ff7ea8;
+    text-align: left;
+}
+
+.intermediate-img {
+    max-width: 100%;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.intermediate-link {
+    color: #fff;
+    font-weight: bold;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.intermediate-link:hover {
+    color: #ff7ea8;
+}
+
+/* Responsividad para pantallas medianas */
+@media (max-width: 1024px) {
+    .intermediate-container {
+        padding: 30px;
+    }
+
+    .intermediate-title {
+        font-size: 2rem;
+    }
+
+    .intermediate-text {
+        font-size: 1rem;
+    }
+}
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 768px) {
+    .intermediate-container {
+        padding: 20px;
+    }
+
+    .intermediate-title {
+        font-size: 1.8rem;
+    }
+
+    .intermediate-text {
+        font-size: 0.9rem;
+    }
+
+    .intermediate-subtitle {
+        font-size: 1.2rem;
+    }
+}
+
+/******************************************************************/
+
+/* Estilo para la sección de Referencias y Formulario de Contacto */
+.references-section {
+    font-family: 'Roboto', Arial, sans-serif;
+    background: linear-gradient(135deg, #000000, #4b276f, #000000, #4b276f); /* Colores y dirección actualizados */
+    background-size: 200% 200%; /* Tamaño del gradiente igual al de la sección hero */
+    padding: 100px 0;
+    color: #fff;
+    animation: backgroundGradientAnimationHero 15s ease infinite; /* Misma animación y duración que en la sección hero */
+}
+
+/* Reutilización de la animación de la sección hero */
+@keyframes backgroundGradientAnimationHero {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.reference {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.reference h4 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ff7ea8;
+}
+
+.reference p {
+    font-size: 1rem;
+    color: #f1f1f1;
+    margin-bottom: 10px;
+}
+
+.reference a {
+    color: #fff;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.reference a:hover {
+    color: #ff7ea8;
+}
+
+/* Estilo del formulario de contacto */
+.contact-form {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.5), -8px -8px 15px rgba(255, 255, 255, 0.1);
+    margin-top: 50px;
+}
+
+.contact-form h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 30px;
+    font-family: 'Great Vibes', cursive;
+}
+
+.contact-form .form-group {
+    margin-bottom: 20px;
+}
+
+.contact-form label {
+    color: #f1f1f1;
+    font-size: 1.125rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: #ff7ea8;
+}
+
+.contact-form button {
+    padding: 15px 30px;
+    background-color: #8e44ad;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contact-form button:hover {
+    background-color: #6c3483;
+}
+
+/* Responsividad para pantallas medianas */
+@media (max-width: 1024px) {
+    .contact-form {
+        padding: 30px;
+    }
+
+    .references-section {
+        background-size: 200% 200%; /* Tamaño igual al de la sección hero */
+    }
+}
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 768px) {
+    .contact-form {
+        padding: 20px;
+    }
+
+    .reference {
+        padding: 15px;
+    }
+
+    .contact-form h2 {
+        font-size: 2rem;
+    }
+
+    .references-section {
+        background-size: 200% 200%; /* Tamaño igual al de la sección hero */
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+footer {
+    min-height: auto; /* Footer no necesita ocupar una pantalla completa */
+    background-color: var(--footer-bg-color); /* Fondo del footer */
+    padding: 40px 0;
+    text-align: center;
+    color: var(--secondary-text-color);
+    font-size: 0.875rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    border-top: 2px solid #00e5ff; /* Línea divisoria superior en azul */
+    box-shadow: 0 0 15px #00e5ff; /* Efecto de brillo alrededor de la línea del footer */
+}
+
+footer a {
+    color: var(--text-color);
+    text-decoration: none;
+    margin: 0 5px;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #00e5ff; /* Color azul brillante al pasar el mouse */
+}
+
+.social-icons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.social-icons a {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #00e5ff; /* Color azul brillante para iconos sociales al pasar el mouse */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .btn-primary {
+        padding: 0.6rem 1.5rem;
+        font-size: 1rem;
+    }
+
+    .navbar-nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    footer {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+
+.hidden {
+    display: none;
+}
+
+.section-visible {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.section-visible.show {
+    opacity: 1;
+}
+
+
+
+
+header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background-color: #000000; /* Color de fondo negro */
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.navbar {
+    border-bottom: 2px solid #00e5ff; /* Color de la línea divisoria (azul) */
+    box-shadow: 0 0 15px #00e5ff; /* Efecto de brillo alrededor de la línea, similar a un efecto LED */
+}
+
+header a {
+    color: #ffffff !important; /* Color de texto blanco */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+header a:hover {
+    color: #00e5ff !important; /* Color azul brillante al pasar el mouse */
+}
