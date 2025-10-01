@@ -1,618 +1,2022 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>App Landy : Home</title>
-    <!-- Favicon -->
-    <link rel="shortcut icon" type="image/icon" href="assets/images/favicon.ico"/>
-    <!-- Font Awesome -->
-    <link href="assets/css/font-awesome.css" rel="stylesheet">
-    <!-- Bootstrap -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet">    
-    <!-- Slick slider -->
-    <link rel="stylesheet" type="text/css" href="assets/css/slick.css"/> 
-    <!-- Fancybox slider -->
-    <link rel="stylesheet" href="assets/css/jquery.fancybox.css" type="text/css" media="screen" /> 
-    <!-- Animate css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/animate.css"/>  
-     <!-- Theme color -->
-    <link id="switcher" href="assets/css/theme-color/default-theme.css" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Andrés Güetio | Creador Visual | Fotografía & Video</title>
+    <style>
+      /* ===============================================
+           VARIABLES Y CONFIGURACIÓN BASE
+        =============================================== */
+      :root {
+        /* Colores principales - Fotografía/Minimalista */
+        --primary: #000000;
+        --primary-light: #1a1a1a;
+        --secondary: #d4af37;
+        --accent: #c0c0c0;
+        --gold: #d4af37;
+        --gradient-hero: linear-gradient(
+          135deg,
+          #667eea 0%,
+          #764ba2 50%,
+          #f093fb 100%
+        );
+        --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
 
-    <!-- Main Style -->
-    <link href="style.css" rel="stylesheet">
+        /* Neumorfismo */
+        --bg-light: #ffffff;
+        --bg-gray: #f8f8f8;
+        --shadow-light: rgba(255, 255, 255, 0.9);
+        --shadow-dark: rgba(0, 0, 0, 0.08);
 
-    <!-- Fonts -->
+        /* Tema oscuro */
+        --dark-bg: #000000;
+        --dark-surface: #0f0f0f;
+        --dark-text: #ffffff;
 
-    <!-- Open Sans for body font -->
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <!-- Cabin for Title -->
-    <link href='https://fonts.googleapis.com/css?family=Cabin' rel='stylesheet' type='text/css'>
-    <!-- Pacifico for Logo   -->
-    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+        /* Texto */
+        --text-primary: #000000;
+        --text-secondary: #666666;
+        --text-light: #999999;
+
+        /* Gradientes */
+        --gradient-gold: linear-gradient(135deg, #d4af37 0%, #f2d16b 100%);
+        --gradient-dark: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+      }
+
+      [data-theme="dark"] {
+        --bg-light: var(--dark-surface);
+        --bg-gray: #0a0a0a;
+        --text-primary: var(--dark-text);
+        --text-secondary: #aaaaaa;
+        --text-light: #666666;
+        --shadow-light: rgba(255, 255, 255, 0.03);
+        --shadow-dark: rgba(0, 0, 0, 0.3);
+      }
+
+      /* ===============================================
+           RESET Y BASE
+        =============================================== */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        font-size: 16px;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        line-height: 1.6;
+        color: var(--text-primary);
+        background: var(--bg-light);
+        overflow-x: hidden;
+        transition: background 0.3s ease, color 0.3s ease;
+      }
+
+      /* ===============================================
+           HEADER Y NAVEGACIÓN
+        =============================================== */
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 1.5rem 5%;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        z-index: 1000;
+        transition: all 0.3s ease;
+      }
+
+      [data-theme="dark"] header {
+        background: rgba(0, 0, 0, 0.98);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      header.scrolled {
+        padding: 1rem 5%;
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      .nav-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        letter-spacing: -0.5px;
+      }
+
+      .logo-subtitle {
+        display: block;
+        font-size: 0.7rem;
+        margin-top: -0.2rem;
+        color: var(--text-secondary);
+        font-weight: 400;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+      }
+
+      nav a {
+        color: var(--text-primary);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.9rem;
+        letter-spacing: 0.5px;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      nav a::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: var(--gold);
+        transition: width 0.3s ease;
+      }
+
+      nav a:hover::after,
+      nav a.active::after {
+        width: 100%;
+      }
+
+      /* Controles del header */
+      .header-controls {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .theme-toggle {
+        background: transparent;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        cursor: pointer;
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+      }
+
+      [data-theme="dark"] .theme-toggle {
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .theme-toggle:hover {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-color: transparent;
+        transform: scale(1.1);
+      }
+
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.5rem;
+      }
+
+      .hamburger span {
+        width: 25px;
+        height: 2px;
+        background: var(--text-primary);
+        border-radius: 3px;
+        transition: all 0.3s ease;
+      }
+
+      .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(7px, 7px);
+      }
+
+      .hamburger.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px);
+      }
+
+      /* ===============================================
+           HERO / INICIO
+        =============================================== */
+      #inicio {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(
+          135deg,
+          #0f0c29 0%,
+          #302b63 50%,
+          #24243e 100%
+        );
+        position: relative;
+        overflow: hidden;
+        padding: 8rem 5% 6rem;
+      }
+
+      #inicio::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+            circle at 20% 80%,
+            rgba(102, 126, 234, 0.15) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 20%,
+            rgba(240, 147, 251, 0.15) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 50% 50%,
+            rgba(212, 175, 55, 0.08) 0%,
+            transparent 50%
+          );
+        pointer-events: none;
+        animation: gradientShift 15s ease infinite;
+      }
+
+      @keyframes gradientShift {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.8;
+        }
+      }
+
+      .hero-content {
+        text-align: center;
+        z-index: 2;
+        max-width: 1000px;
+        animation: fadeInUp 1s ease;
+      }
+
+      .hero-label {
+        display: inline-block;
+        background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 1.5rem;
+      }
+
+      .hero-content h1 {
+        font-size: clamp(3rem, 7vw, 5.5rem);
+        font-weight: 800;
+        color: #ffffff;
+        margin-bottom: 1.5rem;
+        line-height: 1;
+        letter-spacing: -3px;
+      }
+
+      .hero-subtitle {
+        font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 1rem;
+        font-weight: 300;
+        letter-spacing: 1px;
+      }
+
+      .hero-description {
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.6);
+        margin-bottom: 3rem;
+        line-height: 1.8;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-cta {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      /* ===============================================
+           BOTONES
+        =============================================== */
+      .btn {
+        padding: 1rem 2.5rem;
+        border-radius: 12px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-decoration: none;
+        display: inline-block;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border: none;
+        text-transform: uppercase;
+      }
+
+      .btn-gold {
+        background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+        color: #000000;
+        box-shadow: 0 8px 25px rgba(253, 160, 133, 0.4);
+      }
+
+      .btn-gold:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 35px rgba(253, 160, 133, 0.6);
+      }
+
+      .btn-outline {
+        background: transparent;
+        color: #ffffff;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .btn-outline:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.6);
+        transform: translateY(-3px);
+      }
+
+      .btn-dark {
+        background: #000000;
+        color: #ffffff;
+        border: 2px solid #000000;
+      }
+
+      .btn-dark:hover {
+        background: #1a1a1a;
+        transform: translateY(-3px);
+      }
+
+      /* ===============================================
+           SECCIÓN SOBRE MÍ
+        =============================================== */
+      #sobre-mi {
+        padding: 8rem 5%;
+        background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+        position: relative;
+      }
+
+      #sobre-mi::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+            circle at 10% 20%,
+            rgba(102, 126, 234, 0.03) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 90% 80%,
+            rgba(240, 147, 251, 0.03) 0%,
+            transparent 50%
+          );
+        pointer-events: none;
+      }
+
+      [data-theme="dark"] #sobre-mi {
+        background: linear-gradient(180deg, #0f0f0f 0%, #1a1a1a 100%);
+      }
+
+      .about-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5rem;
+        align-items: center;
+      }
+
+      .about-image {
+        aspect-ratio: 3/4;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 8rem;
+        box-shadow: 0 25px 60px rgba(102, 126, 234, 0.3);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .about-image::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 50%;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
+      }
+
+      .about-content h2 {
+        font-size: clamp(2rem, 4vw, 3rem);
+        margin-bottom: 1rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        letter-spacing: -1px;
+      }
+
+      .about-content .label {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+        display: block;
+      }
+
+      .about-content p {
+        color: var(--text-secondary);
+        line-height: 1.8;
+        margin-bottom: 1.5rem;
+        font-size: 1.05rem;
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+
+      .stat-item {
+        text-align: center;
+      }
+
+      .stat-number {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+
+      .stat-label {
+        color: var(--text-secondary);
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      /* ===============================================
+           SECCIÓN PORTAFOLIO
+        =============================================== */
+      #portafolio {
+        padding: 8rem 5%;
+        background: linear-gradient(180deg, #0a0a0a 0%, #1a1a2e 100%);
+        position: relative;
+      }
+
+      #portafolio::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+            circle at 30% 40%,
+            rgba(102, 126, 234, 0.08) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 70% 60%,
+            rgba(118, 75, 162, 0.08) 0%,
+            transparent 50%
+          );
+        pointer-events: none;
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 4rem;
+      }
+
+      .section-label {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+        display: block;
+      }
+
+      .section-title {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 1rem;
+        letter-spacing: -2px;
+      }
+
+      [data-theme="dark"] .section-title {
+        color: var(--text-primary);
+      }
+
+      .section-subtitle {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 1.1rem;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .portfolio-filters {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 4rem;
+        flex-wrap: wrap;
+      }
+
+      .filter-btn {
+        padding: 0.7rem 1.8rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: transparent;
+        color: rgba(255, 255, 255, 0.7);
+        border-radius: 50px;
+        cursor: pointer;
+        font-weight: 500;
+        font-size: 0.85rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+      }
+
+      .filter-btn:hover,
+      .filter-btn.active {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-color: transparent;
+        color: #ffffff;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+      }
+
+      .portfolio-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .portfolio-item {
+        position: relative;
+        aspect-ratio: 4/5;
+        background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+        overflow: hidden;
+        cursor: pointer;
+        transition: all 0.4s ease;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      .portfolio-item:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 50px rgba(102, 126, 234, 0.4);
+      }
+
+      .portfolio-placeholder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 4rem;
+        opacity: 0.3;
+      }
+
+      .portfolio-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.95) 0%,
+          transparent 100%
+        );
+        padding: 2.5rem 2rem 2rem;
+        transform: translateY(100%);
+        transition: transform 0.4s ease;
+      }
+
+      .portfolio-item:hover .portfolio-overlay {
+        transform: translateY(0);
+      }
+
+      .portfolio-category {
+        background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 0.5rem;
+        display: block;
+      }
+
+      .portfolio-overlay h3 {
+        color: #ffffff;
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+      }
+
+      .portfolio-overlay p {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.9rem;
+        line-height: 1.5;
+      }
+
+      /* ===============================================
+           SECCIÓN SERVICIOS
+        =============================================== */
+      #servicios {
+        padding: 8rem 5%;
+        background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+        position: relative;
+      }
+
+      #servicios::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+            circle at 80% 20%,
+            rgba(102, 126, 234, 0.03) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 20% 80%,
+            rgba(240, 147, 251, 0.03) 0%,
+            transparent 50%
+          );
+        pointer-events: none;
+      }
+
+      [data-theme="dark"] #servicios {
+        background: linear-gradient(180deg, #0f0f0f 0%, #1a1a1a 100%);
+      }
+
+      #servicios .section-title,
+      #servicios .section-label {
+        color: var(--text-primary);
+      }
+
+      #servicios .section-subtitle {
+        color: var(--text-secondary);
+      }
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 3rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .service-card {
+        background: var(--bg-light);
+        padding: 3rem 2rem;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        border-radius: 20px;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      [data-theme="dark"] .service-card {
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .service-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+        border-radius: 20px 20px 0 0;
+      }
+
+      .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      .service-card:hover::before {
+        transform: scaleX(1);
+      }
+
+      .service-icon {
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
+        display: block;
+      }
+
+      .service-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+        font-weight: 600;
+      }
+
+      .service-card p {
+        color: var(--text-secondary);
+        line-height: 1.7;
+        margin-bottom: 1.5rem;
+      }
+
+      .service-features {
+        list-style: none;
+      }
+
+      .service-features li {
+        padding: 0.5rem 0;
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+      }
+
+      .service-features li::before {
+        content: "•";
+        color: var(--gold);
+        font-weight: bold;
+        margin-right: 0.8rem;
+      }
+
+      /* ===============================================
+           SECCIÓN TESTIMONIOS
+        =============================================== */
+      #testimonios {
+        padding: 8rem 5%;
+        background: linear-gradient(180deg, #0a0a0a 0%, #1a1a2e 100%);
+        position: relative;
+      }
+
+      #testimonios::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+            circle at 50% 50%,
+            rgba(102, 126, 234, 0.08) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 20%,
+            rgba(240, 147, 251, 0.06) 0%,
+            transparent 50%
+          );
+        pointer-events: none;
+      }
+
+      .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 3rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .testimonial-card {
+        background: #0f0f0f;
+        padding: 2.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 20px;
+        position: relative;
+        transition: all 0.3s ease;
+      }
+
+      .testimonial-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(102, 126, 234, 0.4);
+        box-shadow: 0 15px 40px rgba(102, 126, 234, 0.2);
+      }
+
+      .testimonial-quote {
+        font-size: 4rem;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        opacity: 0.2;
+        position: absolute;
+        top: 1.5rem;
+        left: 1.5rem;
+        line-height: 1;
+      }
+
+      .testimonial-text {
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.8;
+        margin-bottom: 2rem;
+        position: relative;
+        z-index: 2;
+        font-style: italic;
+      }
+
+      .testimonial-author {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .author-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffffff;
+        font-size: 1.3rem;
+        font-weight: 700;
+      }
+
+      .author-info h4 {
+        color: #ffffff;
+        font-size: 1rem;
+        margin-bottom: 0.2rem;
+      }
+
+      .author-info p {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.85rem;
+      }
+
+      /* ===============================================
+           SECCIÓN BLOG
+        =============================================== */
+      #blog {
+        padding: 8rem 5%;
+        background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+        position: relative;
+      }
+
+      #blog::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+            circle at 40% 60%,
+            rgba(102, 126, 234, 0.03) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 60% 40%,
+            rgba(118, 75, 162, 0.03) 0%,
+            transparent 50%
+          );
+        pointer-events: none;
+      }
+
+      [data-theme="dark"] #blog {
+        background: linear-gradient(180deg, #0f0f0f 0%, #1a1a1a 100%);
+      }
+
+      #blog .section-title,
+      #blog .section-label {
+        color: var(--text-primary);
+      }
+
+      #blog .section-subtitle {
+        color: var(--text-secondary);
+      }
+
+      .blog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 3rem;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .blog-card {
+        background: var(--bg-light);
+        overflow: hidden;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        border-radius: 20px;
+        transition: all 0.3s ease;
+      }
+
+      [data-theme="dark"] .blog-card {
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .blog-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 50px rgba(102, 126, 234, 0.2);
+      }
+
+      .blog-image {
+        aspect-ratio: 16/10;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 4rem;
+        opacity: 0.8;
+      }
+
+      .blog-content {
+        padding: 2rem;
+      }
+
+      .blog-meta {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        font-size: 0.8rem;
+        color: var(--text-light);
+      }
+
+      .blog-meta span {
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+      }
+
+      .blog-content h3 {
+        font-size: 1.4rem;
+        margin-bottom: 0.8rem;
+        color: var(--text-primary);
+        font-weight: 600;
+      }
+
+      .blog-content p {
+        color: var(--text-secondary);
+        line-height: 1.7;
+        margin-bottom: 1.5rem;
+      }
+
+      .read-more {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+        display: inline-block;
+      }
+
+      .read-more:hover {
+        letter-spacing: 2px;
+        transform: translateX(5px);
+      }
+
+      /* ===============================================
+           SECCIÓN CONTACTO
+        =============================================== */
+      #contacto {
+        padding: 8rem 5%;
+        background: linear-gradient(180deg, #0a0a0a 0%, #1a1a2e 100%);
+        position: relative;
+      }
+
+      #contacto::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+            circle at 20% 80%,
+            rgba(102, 126, 234, 0.08) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 20%,
+            rgba(240, 147, 251, 0.06) 0%,
+            transparent 50%
+          );
+        pointer-events: none;
+      }
+
+      .contact-container {
+        max-width: 900px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5rem;
+      }
+
+      .contact-info h3 {
+        color: #ffffff;
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+        font-weight: 600;
+      }
+
+      .contact-info p {
+        color: rgba(255, 255, 255, 0.7);
+        line-height: 1.8;
+        margin-bottom: 2rem;
+      }
+
+      .contact-details {
+        list-style: none;
+      }
+
+      .contact-details li {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .contact-details li span:first-child {
+        font-size: 1.5rem;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+
+      .social-links a {
+        width: 45px;
+        height: 45px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+      }
+
+      .social-links a:hover {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-color: transparent;
+        color: #ffffff;
+        transform: translateY(-3px);
+      }
+
+      .contact-form {
+        background: #0f0f0f;
+        padding: 2.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 20px;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: rgba(255, 255, 255, 0.8);
+        font-weight: 500;
+        font-size: 0.9rem;
+      }
+
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        padding: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.03);
+        color: #ffffff;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+      }
+
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-color: #667eea;
+        background: rgba(255, 255, 255, 0.05);
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+      }
+
+      .form-group textarea {
+        resize: vertical;
+        min-height: 120px;
+      }
+
+      .submit-btn {
+        width: 100%;
+        padding: 1.2rem;
+        margin-top: 1rem;
+      }
+
+      /* ===============================================
+           FOOTER
+        =============================================== */
+      footer {
+        background: #000000;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        color: rgba(255, 255, 255, 0.6);
+        padding: 3rem 5% 2rem;
+        text-align: center;
+      }
+
+      footer p {
+        font-size: 0.9rem;
+      }
+
+      .footer-logo {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 0.5rem;
+      }
+
+      /* ===============================================
+           ANIMACIONES
+        =============================================== */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.6s ease;
+      }
+
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ===============================================
+           RESPONSIVE
+        =============================================== */
+      @media (max-width: 968px) {
+        nav ul {
+          position: fixed;
+          top: 0;
+          right: -100%;
+          width: 100%;
+          height: 100vh;
+          background: var(--bg-light);
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 2rem;
+          transition: right 0.4s ease;
+          padding: 2rem;
+        }
+
+        nav ul.active {
+          right: 0;
+        }
+
+        .hamburger {
+          display: flex;
+          z-index: 1001;
+        }
+
+        .about-container,
+        .contact-container {
+          grid-template-columns: 1fr;
+          gap: 3rem;
+        }
+
+        .stats {
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+        }
+
+        .hero-cta {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .btn {
+          width: 100%;
+          max-width: 300px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .services-grid,
+        .portfolio-grid,
+        .testimonials-grid,
+        .blog-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
   </head>
-  <body>  
+  <body data-theme="light">
+    <!-- ===============================================
+         HEADER Y NAVEGACIÓN
+    =============================================== -->
+    <header>
+      <div class="nav-container">
+        <div class="logo">
+          Andrés Güetio
+          <span class="logo-subtitle">Creador Visual</span>
+        </div>
 
-  <!-- BEGAIN PRELOADER -->
-  <div id="preloader">
-    <div id="status">&nbsp;</div>
-  </div>
-  <!-- END PRELOADER -->
+        <nav>
+          <ul id="navMenu">
+            <li><a href="#inicio" class="nav-link active">Inicio</a></li>
+            <li><a href="#sobre-mi" class="nav-link">Sobre Mí</a></li>
+            <li><a href="#portafolio" class="nav-link">Portafolio</a></li>
+            <li><a href="#servicios" class="nav-link">Servicios</a></li>
+            <li><a href="#testimonios" class="nav-link">Testimonios</a></li>
+            <li><a href="#blog" class="nav-link">Blog</a></li>
+            <li><a href="#contacto" class="nav-link">Contacto</a></li>
+          </ul>
+        </nav>
 
-  
-  <!-- Start menu area -->
-  <div class="nav-area">      
-    <a id="menu-btn" href="#"><i class="fa fa-bars"></i></a>
-    <nav class="main-nav" id="main-menu">
-      <span class="fa fa-remove" id="close"></span>
-      <ul>  
-        <li> <a href="#header"><i class="fa fa-home"></i><span>Home</span></a></li>
-        <li><a href="#features"><i class="fa fa-server"></i><span>Features</span></a></li>
-        <li><a href="#howit-works"><i class="fa fa-hourglass"></i><span>How it Works</span></a></li>
-        <li><a href="#pricing-table"><i class="fa fa-usd"></i><span>Pricing</span></a></li>
-        <li><a href="#screenshot"><i class="fa fa-image"></i><span>Screenshots</span></a></li>
-        <li><a href="#download-app"><i class="fa fa-download"></i><span>Download</span></a></li>
-        <li><a href="#testimonial"><i class="fa fa-certificate"></i><span>Testimonials</span></a></li>
-        <li><a href="#contact"><i class="fa fa-envelope-o"></i><span>Contact</span></a></li>          
-      </ul>      
-    </nav>
-  </div>  
-  <!-- End menu area -->
+        <div class="header-controls">
+          <button class="theme-toggle" id="themeToggle">🌙</button>
+          <button class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+    </header>
 
-  <!-- Start header section --> 
-  <header id="header">
-    <div class="header-inner">
-      <!-- Header image -->
-      <img src="assets/images/header-bg.jpg" alt="img">
-      <div class="overlay">
-        <div class="header-content">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="header-top">
-                  <!-- Start logo area -->
-                  <div class="logo-area">
-                    <!-- Image based logo -->
-                    <a class="logo" href="index.html"><img src="assets/images/logo.png" alt="logo"></a>
-                    <!-- Text based logo -->
-                    <!-- <a class="logo" href="index.html">App Landy.</a> -->
-                  </div>
-                  <!-- End logo area -->                 
-                </div>
-              </div>
-              <div class="col-md-12">
-                <div class="header-bottom">
-                <div class="row">
-                  <div class="col-md-6 col-sm-6">
-                    <div class="header-bottom-left">
-                      <h1>Expose Your App with best way</h1>
-                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text</p>
-                      <a class="download-btn" href="#">Download App</a>
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-sm-6">
-                    <div class="header-bottom-right">
-                      <!-- <img src="assets/images/iphone-group1.png" alt="iphone grpup img"> -->
-                      <img src="assets/images/Nexus-6-MockUp-group.png" alt="iphone grpup img">
-                    </div>
-                  </div>
-                </div>
-                </div>
-              </div>
+    <!-- ===============================================
+         HERO / INICIO
+    =============================================== -->
+    <section id="inicio">
+      <div class="hero-content">
+        <span class="hero-label">Creador Visual</span>
+        <h1>Andrés Güetio</h1>
+        <p class="hero-subtitle">Fotografía | Video | Contenido Digital</p>
+        <p class="hero-description">
+          Creador de historias visuales con propósito. CEO de CreaXiøn Content.
+          Transformo ideas en contenido que impacta y conecta con tu audiencia.
+        </p>
+        <div class="hero-cta">
+          <a href="#contacto" class="btn btn-gold">Trabajemos Juntos</a>
+          <a href="#portafolio" class="btn btn-outline">Ver Portafolio</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===============================================
+         SOBRE MÍ
+    =============================================== -->
+    <section id="sobre-mi" class="fade-in">
+      <div class="about-container">
+        <div class="about-image">📸</div>
+        <div class="about-content">
+          <span class="label">Sobre Mí</span>
+          <h2>Creando Contenido que Conecta</h2>
+          <p>
+            Soy Andrés Güetio, creador visual especializado en fotografía, video
+            y contenido digital para redes sociales. Mi pasión es transformar
+            ideas en historias visuales que impactan y generan resultados.
+          </p>
+          <p>
+            Como CEO de <strong>CreaXiøn Content</strong>, lidero un equipo de
+            profesionales dedicados a la creación audiovisual estratégica. Nos
+            especializamos en planeación y producción de contenido que no solo
+            se ve bien, sino que conecta con tu audiencia y cumple objetivos.
+          </p>
+          <p>
+            Cada proyecto es una oportunidad para contar una historia única. Mi
+            enfoque combina creatividad, técnica y estrategia para entregar
+            contenido que destaca en el mundo digital.
+          </p>
+
+          <div class="stats">
+            <div class="stat-item">
+              <span class="stat-number">500+</span>
+              <span class="stat-label">Proyectos</span>
             </div>
-          </div>
-        </div>
-      </div>      
-    </div>
-  </header>
-  <!-- End header section --> 
-
-  <!-- Start Features -->
-  <section id="features">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="title-area">
-            <h2 class="title">Awesome <span>Features</span></h2>
-            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour</p>
-          </div>
-        </div>
-        <div class="col-md-12">
-          <div class="features-area">
-            <div class="row">
-              <!-- Start features left -->
-              <div class="col-md-4">
-                <div class="features-left">
-                  <ul class="features-list features-list-left">
-                    <li class="wow fadeInLeft" data-wow-duration="0.5s" data-wow-delay="0.5s">
-                      <i class="fa fa-desktop"></i>
-                      <div class="features-content">
-                        <h4>Bootstrap 3.3</h4>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
-                      </div>
-                    </li>
-                    <li class="wow fadeInLeft" data-wow-duration="0.75s" data-wow-delay="0.75s">
-                      <i class="fa fa-edit"></i>
-                      <div class="features-content">
-                        <h4>Easy to Customize</h4>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
-                      </div>
-                    </li>
-                    <li class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay="1s">
-                      <i class="fa fa-object-ungroup"></i>
-                      <div class="features-content">
-                        <h4>Creative Design</h4>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
-                      </div>
-                    </li>
-                    <li class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay="1s">
-                      <i class="fa fa-flask"></i>
-                      <div class="features-content">
-                        <h4>Easy to Use</h4>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <!-- End features left -->
-              <!-- Start features img -->
-              <div class="col-md-4">
-                <div class="feature-img wow fadeInUp">
-                  <img src="assets/images/nexus-6-single.png" alt="iPhone mockup">
-                </div>
-              </div>
-              <!-- End features img -->
-              <!-- Start features right -->
-              <div class="col-md-4">
-                <div class="features-right">
-                  <ul class="features-list features-list-right">
-                    <li class="wow fadeInRight" data-wow-duration="0.5s" data-wow-delay="0.5s">
-                      <i class="fa fa-rocket"></i>
-                      <div class="features-content">
-                        <h4>Premium Quality</h4>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
-                      </div>
-                    </li>
-                    <li class="wow fadeInRight" data-wow-duration="0.75s" data-wow-delay="0.75s">
-                      <i class="fa fa-cogs"></i>
-                      <div class="features-content">
-                        <h4>Different Colors</h4>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
-                      </div>
-                    </li>
-                    <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay="1s">
-                      <i class="fa fa-heart"></i>
-                      <div class="features-content">
-                        <h4>User Friendly</h4>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
-                      </div>
-                    </li>
-                    <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay="1s">
-                      <i class="fa fa-support"></i>
-                      <div class="features-content">
-                        <h4>24/7 Support</h4>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>   
-              <!-- End features right -->                 
+            <div class="stat-item">
+              <span class="stat-number">200+</span>
+              <span class="stat-label">Clientes</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">6+</span>
+              <span class="stat-label">Años Exp.</span>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-  <!-- End Features -->
+    </section>
 
-  <!-- Start how it works -->
-  <section id="howit-works">
-    <div class="howit-works-area">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="title-area wow fadeInLeft">
-              <h2 class="title">How it <span>Works</span></h2>
-              <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour</p>
-            </div>
-          </div>  
-          <div class="col-md-12">
-            <div class="howit-works-video">
-              <iframe src="https://player.vimeo.com/video/33790882" width="428" height="276" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>                  
-            </div>
+    <!-- ===============================================
+         PORTAFOLIO
+    =============================================== -->
+    <section id="portafolio" class="fade-in">
+      <div class="section-header">
+        <span class="section-label">Portafolio</span>
+        <h2 class="section-title">Trabajos Recientes</h2>
+        <p class="section-subtitle">
+          Una selección de proyectos que reflejan mi visión creativa
+        </p>
+      </div>
+
+      <div class="portfolio-filters">
+        <button class="filter-btn active" data-filter="all">Todos</button>
+        <button class="filter-btn" data-filter="fotografia">Fotografía</button>
+        <button class="filter-btn" data-filter="video">Video</button>
+        <button class="filter-btn" data-filter="branding">Branding</button>
+      </div>
+
+      <div class="portfolio-grid" id="portfolioGrid">
+        <div class="portfolio-item" data-category="fotografia">
+          <div class="portfolio-placeholder">📷</div>
+          <div class="portfolio-overlay">
+            <span class="portfolio-category">Fotografía</span>
+            <h3>Sesión Producto</h3>
+            <p>Fotografía comercial para marca de moda sostenible</p>
           </div>
+        </div>
+
+        <div class="portfolio-item" data-category="video">
+          <div class="portfolio-placeholder">🎬</div>
+          <div class="portfolio-overlay">
+            <span class="portfolio-category">Video</span>
+            <h3>Video Corporativo</h3>
+            <p>Producción audiovisual para empresa tecnológica</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-category="branding">
+          <div class="portfolio-placeholder">✨</div>
+          <div class="portfolio-overlay">
+            <span class="portfolio-category">Branding</span>
+            <h3>Identidad Visual</h3>
+            <p>Contenido de marca para startup de gastronomía</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-category="fotografia">
+          <div class="portfolio-placeholder">🌟</div>
+          <div class="portfolio-overlay">
+            <span class="portfolio-category">Fotografía</span>
+            <h3>Retrato Profesional</h3>
+            <p>Sesión personal branding para emprendedores</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-category="video">
+          <div class="portfolio-placeholder">🎥</div>
+          <div class="portfolio-overlay">
+            <span class="portfolio-category">Video</span>
+            <h3>Reel Instagram</h3>
+            <p>Contenido viral para marca de lifestyle</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-category="branding">
+          <div class="portfolio-placeholder">🎨</div>
+          <div class="portfolio-overlay">
+            <span class="portfolio-category">Branding</span>
+            <h3>Campaña Digital</h3>
+            <p>Estrategia de contenido para lanzamiento de producto</p>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-  <!-- End how it works -->
+    </section>
 
-  <!-- start pricing table -->
-  <section id="pricing-table">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="title-area wow fadeInLeft">
-            <h2 class="title">Pricing <span>Plans</span></h2>
-            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour</p>
+    <!-- ===============================================
+         SERVICIOS
+    =============================================== -->
+    <section id="servicios" class="fade-in">
+      <div class="section-header">
+        <span class="section-label">Servicios</span>
+        <h2 class="section-title">Lo Que Hago</h2>
+        <p class="section-subtitle">
+          Soluciones creativas integrales para tu marca
+        </p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <span class="service-icon">📸</span>
+          <h3>Fotografía Profesional</h3>
+          <p>
+            Capturamos la esencia de tu marca con imágenes profesionales que
+            comunican tu historia y valores.
+          </p>
+          <ul class="service-features">
+            <li>Fotografía de producto</li>
+            <li>Retrato corporativo</li>
+            <li>Fotografía gastronómica</li>
+            <li>Lifestyle y branding</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <span class="service-icon">🎬</span>
+          <h3>Producción Audiovisual</h3>
+          <p>
+            Creamos videos impactantes que cuentan tu historia y conectan
+            emocionalmente con tu audiencia.
+          </p>
+          <ul class="service-features">
+            <li>Videos corporativos</li>
+            <li>Reels y contenido vertical</li>
+            <li>Spots publicitarios</li>
+            <li>Documentales de marca</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <span class="service-icon">📱</span>
+          <h3>Contenido para Redes</h3>
+          <p>
+            Planeación y creación de contenido estratégico que genera engagement
+            y construye comunidad.
+          </p>
+          <ul class="service-features">
+            <li>Estrategia de contenido</li>
+            <li>Producción mensual</li>
+            <li>Diseño gráfico</li>
+            <li>Gestión de redes</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <span class="service-icon">✨</span>
+          <h3>Personal Branding</h3>
+          <p>
+            Desarrollamos tu marca personal con contenido visual que te
+            posiciona como autoridad en tu industria.
+          </p>
+          <ul class="service-features">
+            <li>Sesiones fotográficas</li>
+            <li>Videos de presentación</li>
+            <li>Contenido LinkedIn</li>
+            <li>Material profesional</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <span class="service-icon">🎯</span>
+          <h3>Campañas Publicitarias</h3>
+          <p>
+            Diseñamos y ejecutamos campañas visuales que impulsan tus resultados
+            de marketing.
+          </p>
+          <ul class="service-features">
+            <li>Concepto creativo</li>
+            <li>Producción completa</li>
+            <li>Material para ads</li>
+            <li>Seguimiento de resultados</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <span class="service-icon">🎨</span>
+          <h3>Branding Visual</h3>
+          <p>
+            Creamos la identidad visual de tu marca con fotografía y video que
+            reflejan tu esencia única.
+          </p>
+          <ul class="service-features">
+            <li>Banco de imágenes</li>
+            <li>Guía de estilo visual</li>
+            <li>Templates de contenido</li>
+            <li>Assets digitales</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===============================================
+         TESTIMONIOS
+    =============================================== -->
+    <section id="testimonios" class="fade-in">
+      <div class="section-header">
+        <span class="section-label">Testimonios</span>
+        <h2 class="section-title">Lo Que Dicen Mis Clientes</h2>
+        <p class="section-subtitle">
+          Historias reales de marcas que han confiado en mi trabajo
+        </p>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-quote">"</div>
+          <p class="testimonial-text">
+            Andrés transformó completamente nuestra presencia digital. Su visión
+            creativa y profesionalismo son excepcionales. El contenido que creó
+            nos ayudó a triplicar nuestro engagement.
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar">M</div>
+            <div class="author-info">
+              <h4>María González</h4>
+              <p>CEO, Tech Startup</p>
+            </div>
           </div>
         </div>
-        <div class="col-md-12">
-          <div class="pricing-table-content">
-            <div class="row">
-              <!-- Start single plan -->
-              <div class="col-md-3 col-sm-6">                    
-                <div class="single-plan wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.5s">
-                  <div class="single-plan-head">
-                    <h5>Startup</h5>
-                    <p>$20/<span>month</span></p>
-                  </div>
-                  <div class="single-plan-content">
-                    <ul>
-                      <li>5GB Space</li>
-                      <li>10GB Bandwidth</li>
-                      <li class="delete">15 Email Account</li>
-                      <li class="delete">Integration with WordPress</li>
-                      <li class="delete">Unlimited Support</li>
-                    </ul>
-                  </div>
-                  <div class="single-plan-bottom">
-                    <a class="signup-btn" href="http://mixdesigns.net">Sign Up</a>
-                  </div>
-                </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-quote">"</div>
+          <p class="testimonial-text">
+            Trabajar con Andrés fue una experiencia increíble. No solo entregó
+            fotos de altísima calidad, sino que entendió perfectamente la
+            esencia de nuestra marca. Altamente recomendado.
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar">C</div>
+            <div class="author-info">
+              <h4>Carlos Ruiz</h4>
+              <p>Director de Marketing</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-quote">"</div>
+          <p class="testimonial-text">
+            El video corporativo que produjo CreaXiøn superó todas nuestras
+            expectativas. La narrativa, la calidad técnica y la atención al
+            detalle son de primer nivel. Un verdadero profesional.
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar">L</div>
+            <div class="author-info">
+              <h4>Laura Méndez</h4>
+              <p>Fundadora, Fashion Brand</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===============================================
+         BLOG
+    =============================================== -->
+    <section id="blog" class="fade-in">
+      <div class="section-header">
+        <span class="section-label">Blog</span>
+        <h2 class="section-title">Últimas Publicaciones</h2>
+        <p class="section-subtitle">
+          Tips, tendencias y recursos para creadores de contenido
+        </p>
+      </div>
+
+      <div class="blog-grid">
+        <article class="blog-card">
+          <div class="blog-image">📱</div>
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span>📅 15 Sep 2024</span>
+              <span>⏱️ 5 min</span>
+            </div>
+            <h3>10 Tips para Fotos Profesionales con tu Smartphone</h3>
+            <p>
+              Descubre cómo sacar el máximo provecho de la cámara de tu teléfono
+              y crear contenido de calidad profesional sin equipo costoso.
+            </p>
+            <a href="#" class="read-more">Leer Más →</a>
+          </div>
+        </article>
+
+        <article class="blog-card">
+          <div class="blog-image">🎬</div>
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span>📅 10 Sep 2024</span>
+              <span>⏱️ 7 min</span>
+            </div>
+            <h3>Cómo Crear Reels que Sí Funcionan en 2024</h3>
+            <p>
+              Estrategias comprobadas para crear contenido vertical que capte la
+              atención y genere interacciones auténticas en Instagram.
+            </p>
+            <a href="#" class="read-more">Leer Más →</a>
+          </div>
+        </article>
+
+        <article class="blog-card">
+          <div class="blog-image">💡</div>
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span>📅 5 Sep 2024</span>
+              <span>⏱️ 6 min</span>
+            </div>
+            <h3>Iluminación Natural: El Secreto de las Fotos Perfectas</h3>
+            <p>
+              Aprende a dominar la luz natural para crear fotografías con
+              profundidad, textura y ese toque profesional que hace la
+              diferencia.
+            </p>
+            <a href="#" class="read-more">Leer Más →</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===============================================
+         CONTACTO
+    =============================================== -->
+    <section id="contacto" class="fade-in">
+      <div class="section-header">
+        <span class="section-label">Contacto</span>
+        <h2 class="section-title">Trabajemos Juntos</h2>
+        <p class="section-subtitle">¿Tienes un proyecto en mente? Hablemos</p>
+      </div>
+
+      <div class="contact-container">
+        <div class="contact-info">
+          <h3>Conectemos</h3>
+          <p>
+            ¿Listo para llevar tu contenido al siguiente nivel? Cuéntame sobre
+            tu proyecto y creemos algo increíble juntos.
+          </p>
+
+          <ul class="contact-details">
+            <li>
+              <span>📧</span>
+              <div>
+                <strong>Email</strong><br />
+                andres@creaxion.com
               </div>
-              <!-- End single plan -->
-              <!-- Start single plan -->
-              <div class="col-md-3 col-sm-6">
-                <div class="single-plan wow fadeInUp" data-wow-duration="0.75s" data-wow-delay="0.75s">
-                  <div class="single-plan-head">
-                    <h5>Pro</h5>
-                    <p>$35/<span>month</span></p>
-                  </div>
-                  <div class="single-plan-content">
-                    <ul>
-                      <li>5GB Space</li>
-                      <li>10GB Bandwidth</li>
-                      <li>15 Email Account</li>
-                      <li class="delete">Integration with WordPress</li>
-                      <li class="delete">Unlimited Support</li>
-                    </ul>
-                  </div>
-                  <div class="single-plan-bottom">
-                    <a class="signup-btn" href="#">Sign Up</a>
-                  </div>
-                </div>
+            </li>
+            <li>
+              <span>📱</span>
+              <div>
+                <strong>WhatsApp</strong><br />
+                +57 300 123 4567
               </div>
-              <!-- End single plan -->
-              <!-- Start single plan -->
-              <div class="col-md-3 col-sm-6">
-                <div class="single-plan feature-price wow fadeInUp" data-wow-duration="1s" data-wow-delay="1s">
-                  <div class="single-plan-head">
-                    <h5>Business</h5>
-                    <p>$50/<span>month</span></p>
-                  </div>
-                  <div class="single-plan-content">
-                    <ul>
-                      <li>5GB Space</li>
-                      <li>10GB Bandwidth</li>
-                      <li>15 Email Account</li>
-                      <li>Integration with WordPress</li>
-                      <li class="delete">Unlimited Support</li>
-                    </ul>
-                  </div>
-                  <div class="single-plan-bottom">
-                    <a class="signup-btn" href="#">Sign Up</a>
-                  </div>
-                </div>
+            </li>
+            <li>
+              <span>📍</span>
+              <div>
+                <strong>Ubicación</strong><br />
+                Bogotá, Colombia
               </div>
-              <!-- End single plan -->
-              <!-- Start single plan -->
-              <div class="col-md-3 col-sm-6">
-                <div class="single-plan wow fadeInUp" data-wow-duration="1.25s" data-wow-delay="1.25s">
-                  <div class="single-plan-head">
-                    <h5>Advanced</h5>
-                    <p>$75/<span>month</span></p>
-                  </div>
-                  <div class="single-plan-content">
-                    <ul>
-                      <li>5GB Space</li>
-                      <li>10GB Bandwidth</li>
-                      <li>15 Email Account</li>
-                      <li>Integration with WordPress</li>
-                      <li>Unlimited Support</li>
-                    </ul>
-                  </div>
-                  <div class="single-plan-bottom">
-                    <a class="signup-btn" href="#">Sign Up</a>
-                  </div>
-                </div>
-              </div>
-              <!-- End single plan -->
-            </div>
+            </li>
+          </ul>
+
+          <div class="social-links">
+            <a
+              href="https://instagram.com/creaxion_content"
+              target="_blank"
+              title="Instagram"
+              >📷</a
+            >
+            <a href="https://facebook.com" target="_blank" title="Facebook"
+              >f</a
+            >
+            <a href="https://linkedin.com" target="_blank" title="LinkedIn"
+              >in</a
+            >
+            <a href="https://tiktok.com" target="_blank" title="TikTok">🎵</a>
           </div>
         </div>
+
+        <form class="contact-form" id="contactForm">
+          <div class="form-group">
+            <label for="name">Nombre Completo *</label>
+            <input type="text" id="name" name="name" required />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+
+          <div class="form-group">
+            <label for="service">Servicio de Interés *</label>
+            <select id="service" name="service" required>
+              <option value="">Selecciona una opción</option>
+              <option value="fotografia">Fotografía Profesional</option>
+              <option value="video">Producción Audiovisual</option>
+              <option value="contenido">Contenido para Redes</option>
+              <option value="branding">Personal Branding</option>
+              <option value="campana">Campaña Publicitaria</option>
+              <option value="otro">Otro</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Cuéntame sobre tu Proyecto *</label>
+            <textarea
+              id="message"
+              name="message"
+              placeholder="Describe tu idea, objetivos y cualquier detalle relevante..."
+              required
+            ></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-gold submit-btn">
+            Enviar Mensaje
+          </button>
+        </form>
       </div>
-    </div>
-  </section>
-  <!-- End pricing table -->
+    </section>
 
-  <!-- Start screenshot -->
-  <section id="screenshot">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="title-area wow fadeInUp">
-            <h2 class="title">App <span>Screenshots</span></h2>
-            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour</p>
-          </div>
-        </div>
-        <div class="col-md-12">
-          <div class="screenshots-area">
-            <ul class="screenshots-slide">
-              <li class="col-md-3 wow fadeInLeft">
-               <a class="fancybox" data-fancybox-group="gallery" href="assets/images/app-screenshot-popup.jpg"><img src="assets/images/app-screenshot.jpg" alt="app screenshot">
-                  <div class="view-btn-area">
-                    <span class="fa fa-search view-btn"></span>
-                  </div>
-               </a>
-              </li>
-               <li class="col-md-3 wow fadeInLeft">
-                 <a class="fancybox" data-fancybox-group="gallery" href="assets/images/app-screenshot-popup.jpg"><img src="assets/images/app-screenshot.jpg" alt="app screenshot">
-                    <div class="view-btn-area">
-                      <span class="fa fa-search view-btn"></span>
-                    </div>
-                 </a>
-              </li>
-               <li class="col-md-3 wow fadeInLeft">
-                 <a class="fancybox" data-fancybox-group="gallery" href="assets/images/app-screenshot-popup.jpg"><img src="assets/images/app-screenshot.jpg" alt="app screenshot">
-                  <div class="view-btn-area">
-                    <span class="fa fa-search view-btn"></span>
-                  </div>
-               </a>
-              </li>
-               <li class="col-md-3 wow fadeInLeft">
-                 <a class="fancybox" data-fancybox-group="gallery" href="assets/images/app-screenshot-popup.jpg"><img src="assets/images/app-screenshot.jpg" alt="app screenshot">
-                  <div class="view-btn-area">
-                    <span class="fa fa-search view-btn"></span>
-                  </div>
-               </a>
-              </li>
-              <li class="col-md-3 wow fadeInLeft">
-                 <a class="fancybox" data-fancybox-group="gallery" href="assets/images/app-screenshot-popup.jpg"><img src="assets/images/app-screenshot.jpg" alt="app screenshot">
-                  <div class="view-btn-area">
-                    <span class="fa fa-search view-btn"></span>
-                  </div>
-               </a>
-              </li>
-               <li class="col-md-3 wow fadeInLeft">
-                 <a class="fancybox" data-fancybox-group="gallery" href="assets/images/app-screenshot-popup.jpg"><img src="assets/images/app-screenshot.jpg" alt="app screenshot">
-                  <div class="view-btn-area">
-                    <span class="fa fa-search view-btn"></span>
-                  </div>
-               </a>
-              </li>
-               <li class="col-md-3 wow fadeInLeft">
-                 <a class="fancybox" data-fancybox-group="gallery" href="assets/images/app-screenshot-popup.jpg"><img src="assets/images/app-screenshot.jpg" alt="app screenshot">
-                  <div class="view-btn-area">
-                    <span class="fa fa-search view-btn"></span>
-                  </div>
-               </a>
-              </li>
-               <li class="col-md-3 wow fadeInLeft">
-                 <a class="fancybox" data-fancybox-group="gallery" href="assets/images/app-screenshot-popup.jpg"><img src="assets/images/app-screenshot.jpg" alt="app screenshot">
-                  <div class="view-btn-area">
-                    <span class="fa fa-search view-btn"></span>
-                  </div>
-               </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- End screenshot -->
+    <!-- ===============================================
+         FOOTER
+    =============================================== -->
+    <footer>
+      <div class="footer-logo">Andrés Güetio</div>
+      <p>Creador Visual | CEO de CreaXiøn Content</p>
+      <p style="margin-top: 1rem; font-size: 0.85rem">
+        &copy; 2025 Andrés Güetio. Todos los derechos reservados.
+      </p>
+    </footer>
 
-  <!-- Start download app -->
-  <section id="download-app">
-    <div class="download-overlay">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="title-area wow fadeInUp">
-              <h2 class="title">Download <span>App</span></h2>
-              <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour</p>
-            </div>
-          </div>
-          <!-- Start download app content -->
-          <div class="col-md-12">
-            <div class="download-app-content">
-              <!-- Start single download -->
-              <a class="single-download wow fadeInLeft" data-wow-duration="0.5s" data-wow-delay="0.5s" href="#">
-                <div class="download-icon">
-                  <i class="fa fa-windows"></i>
-                </div>
-                <div class="download-content">
-                  <p>Available on the</p>
-                  <span>Windows Store</span>
-                </div>
-              </a>
-              <!-- Start single download -->
-              <a class="single-download wow fadeInLeft" data-wow-duration="0.75s" data-wow-delay="0.75s" href="#">
-                <div class="download-icon">
-                  <i class="fa fa-play"></i>
-                </div>
-                <div class="download-content">
-                  <p>Available on the</p>
-                  <span>Play Store</span>
-                </div>
-              </a>
-              <!-- Start single download -->
-              <a class="single-download wow fadeInLeft" data-wow-duration="1s" data-wow-delay="1s" href="#">
-                <div class="download-icon">
-                  <i class="fa fa-apple"></i>
-                </div>
-                <div class="download-content">
-                  <p>Available on the</p>
-                  <span>Apple Store</span>
-                </div>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- End download app -->
+    <!-- ===============================================
+         JAVASCRIPT
+    =============================================== -->
+    <script>
+      // ===============================================
+      // CLASE: ThemeManager
+      // ===============================================
+      class ThemeManager {
+        constructor() {
+          this.body = document.body;
+          this.themeToggle = document.getElementById("themeToggle");
+          this.currentTheme = localStorage.getItem("theme") || "light";
+          this.init();
+        }
 
-  <!-- Start testimonial -->
-  <section id="testimonial">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="title-area wow fadeInLeft">
-            <h2 class="title">Clients <span>Feedback</span></h2>
-            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour</p>
-          </div>
-        </div>
-        <div class="col-md-12">
-          <div class="testimonial-slider">
-            <!-- single slide -->
-            <div class="testimonial-single-slide">               
-              <img class="testi-avatar" src="assets/images/testi1.jpg" alt="testimonial img">
-              <p class="testi-name">Samantha</p>
-              <p class="testi-company">Google.com</p>
-              <p class="testi-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry ue ipsa quae ab illo inventore veritatis et quasi</p>
-            </div>
-            <!-- single slide -->
-            <div class="testimonial-single-slide">               
-              <img class="testi-avatar" src="assets/images/testi3.jpg" alt="testimonial img">
-              <p class="testi-name">Alexander</p>
-              <p class="testi-company">Twitter.com</p>
-              <p class="testi-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry ue ipsa</p>
-            </div>
-            <!-- single slide -->
-            <div class="testimonial-single-slide">               
-              <img class="testi-avatar" src="assets/images/testi2.jpg" alt="testimonial img">
-              <p class="testi-name">Victoria</p>
-              <p class="testi-company">Facebook.com</p>
-              <p class="testi-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry ue ipsa</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>      
-  </section>
-  <!-- End testimonial -->
+        init() {
+          this.setTheme(this.currentTheme);
+          this.themeToggle.addEventListener("click", () => this.toggleTheme());
+        }
 
-  <!-- Start subscribe -->
-  <section id="subscribe">
-    <div class="download-overlay">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="title-area wow fadeInUp">
-              <h2 class="title">Subscribe Our <span>Newsletter</span></h2>
-              <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour</p>
-            </div>
-          </div>
-          <!-- Start download app content -->
-          <div class="col-md-12">
-            <div class="subscribe-content wow fadeInLeft">
-              <form action="" class="subcr-form">
-                <i class="fa fa-envelope-o"></i>
-                <input type="text" name="" id="" placeholder="Type your mail address..">
-                <button type="submit" class="subcr-btn">Subscribe</button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- End download app -->
+        setTheme(theme) {
+          this.body.setAttribute("data-theme", theme);
+          this.themeToggle.textContent = theme === "light" ? "🌙" : "☀️";
+          localStorage.setItem("theme", theme);
+          this.currentTheme = theme;
+        }
 
-  <!-- Start contact -->
-  <section id="contact">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="title-area">
-              <h2 class="title">Get in <span>Touch</span></h2>
-              <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered</p>
-          </div>
-        </div>
-        <div class="col-md-12">
-          <div class="contact-area">
-            <form action="" class="contact-form">
-              <div class="form-group">                  
-                <input type="text" class="form-control" placeholder="Your name">
-              </div>
-              <div class="form-group">                  
-                <input type="email" class="form-control" placeholder="Email">
-              </div>
-              <div class="form-group">                  
-                <textarea class="form-control" rows="3" placeholder="Your Message"></textarea>
-              </div>
-              <div class="send-area">
-                <button type="submit" class="send-btn">Send Now</button>
-              </div>  
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- End contact -->
+        toggleTheme() {
+          const newTheme = this.currentTheme === "light" ? "dark" : "light";
+          this.setTheme(newTheme);
+        }
+      }
 
-  <!-- Start footer -->
-  <footer id="footer">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="footer-social">
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-google-plus"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-          </div>
-          <div class="footer-text">
-            <p>Designed by <a href="https://www.linkedin.com/in/carlos-daniel-pati%C3%B1o-cajamarca-655519315/">Carlos Patiño</a></p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
-  <!-- End -->
+      // ===============================================
+      // CLASE: NavigationManager
+      // ===============================================
+      class NavigationManager {
+        constructor() {
+          this.header = document.querySelector("header");
+          this.hamburger = document.getElementById("hamburger");
+          this.navMenu = document.getElementById("navMenu");
+          this.navLinks = document.querySelectorAll(".nav-link");
+          this.init();
+        }
 
+        init() {
+          window.addEventListener("scroll", () => this.handleScroll());
+          this.hamburger.addEventListener("click", () => this.toggleMenu());
+          this.navLinks.forEach((link) => {
+            link.addEventListener("click", (e) => this.handleNavClick(e));
+          });
+        }
 
-  <!-- jQuery library -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>    
-  <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <!-- Bootstrap -->
-  <script src="assets/js/bootstrap.js"></script>
-  <!-- Slick Slider -->
-  <script type="text/javascript" src="assets/js/slick.js"></script>   
-  <!-- Add fancyBox -->        
-  <script type="text/javascript" src="assets/js/jquery.fancybox.pack.js"></script>
-  <!-- Wow animation -->
-  <script type="text/javascript" src="assets/js/wow.js"></script> 
-  <!-- Off-canvas Menu -->   
-  <script src="assets/js/classie.js"></script>
- 
-  <!-- Custom js -->
-  <script type="text/javascript" src="assets/js/custom.js"></script>
-    
+        handleScroll() {
+          if (window.scrollY > 100) {
+            this.header.classList.add("scrolled");
+          } else {
+            this.header.classList.remove("scrolled");
+          }
+
+          let current = "";
+          document.querySelectorAll("section").forEach((section) => {
+            const sectionTop = section.offsetTop;
+            if (window.scrollY >= sectionTop - 200) {
+              current = section.getAttribute("id");
+            }
+          });
+
+          this.navLinks.forEach((link) => {
+            link.classList.remove("active");
+            if (link.getAttribute("href").slice(1) === current) {
+              link.classList.add("active");
+            }
+          });
+        }
+
+        toggleMenu() {
+          this.hamburger.classList.toggle("active");
+          this.navMenu.classList.toggle("active");
+        }
+
+        handleNavClick(e) {
+          e.preventDefault();
+          const targetId = e.target.getAttribute("href");
+          const targetSection = document.querySelector(targetId);
+
+          if (targetSection) {
+            targetSection.scrollIntoView({ behavior: "smooth" });
+          }
+
+          if (window.innerWidth <= 968) {
+            this.toggleMenu();
+          }
+        }
+      }
+
+      // ===============================================
+      // CLASE: PortfolioController
+      // ===============================================
+      class PortfolioController {
+        constructor() {
+          this.filterButtons = document.querySelectorAll(".filter-btn");
+          this.portfolioItems = document.querySelectorAll(".portfolio-item");
+          this.init();
+        }
+
+        init() {
+          this.filterButtons.forEach((btn) => {
+            btn.addEventListener("click", () => this.filterPortfolio(btn));
+          });
+        }
+
+        filterPortfolio(button) {
+          const filter = button.getAttribute("data-filter");
+
+          this.filterButtons.forEach((btn) => btn.classList.remove("active"));
+          button.classList.add("active");
+
+          this.portfolioItems.forEach((item) => {
+            const category = item.getAttribute("data-category");
+
+            if (filter === "all" || category === filter) {
+              item.style.display = "block";
+              setTimeout(() => {
+                item.style.opacity = "1";
+                item.style.transform = "scale(1)";
+              }, 10);
+            } else {
+              item.style.opacity = "0";
+              item.style.transform = "scale(0.9)";
+              setTimeout(() => {
+                item.style.display = "none";
+              }, 300);
+            }
+          });
+        }
+      }
+
+      // ===============================================
+      // CLASE: FormHandler
+      // ===============================================
+      class FormHandler {
+        constructor() {
+          this.form = document.getElementById("contactForm");
+          this.init();
+        }
+
+        init() {
+          this.form.addEventListener("submit", (e) => this.handleSubmit(e));
+        }
+
+        handleSubmit(e) {
+          e.preventDefault();
+
+          const formData = {
+            name: document.getElementById("name").value,
+            email: document.getElementById("email").value,
+            service: document.getElementById("service").value,
+            message: document.getElementById("message").value,
+          };
+
+          if (
+            !formData.name ||
+            !formData.email ||
+            !formData.service ||
+            !formData.message
+          ) {
+            alert("❌ Por favor completa todos los campos requeridos");
+            return;
+          }
+
+          console.log("Formulario enviado:", formData);
+          alert(
+            `✅ ¡Gracias ${formData.name}!\n\nTu mensaje ha sido recibido. Me pondré en contacto contigo pronto para discutir tu proyecto de ${formData.service}.\n\n📧 Email: ${formData.email}`
+          );
+
+          this.form.reset();
+        }
+      }
+
+      // ===============================================
+      // CLASE: AnimationObserver
+      // ===============================================
+      class AnimationObserver {
+        constructor() {
+          this.elements = document.querySelectorAll(".fade-in");
+          this.init();
+        }
+
+        init() {
+          const options = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px",
+          };
+
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+              }
+            });
+          }, options);
+
+          this.elements.forEach((el) => observer.observe(el));
+        }
+      }
+
+      // ===============================================
+      // INICIALIZACIÓN
+      // ===============================================
+      document.addEventListener("DOMContentLoaded", () => {
+        const themeManager = new ThemeManager();
+        const navigationManager = new NavigationManager();
+        const portfolioController = new PortfolioController();
+        const formHandler = new FormHandler();
+        const animationObserver = new AnimationObserver();
+
+        console.log("🎬 Andrés Güetio Portfolio - Loaded successfully");
+        console.log("📸 Created by CreaXiøn Content");
+      });
+    </script>
   </body>
 </html>
