@@ -190,7 +190,7 @@ function sendToWhatsApp(event) {
     const encodedMessage = encodeURIComponent(whatsappMessage);
 
     // Número de WhatsApp y URL
-    const phoneNumber = '+573229476426';
+    const phoneNumber = '+573214764861';
     const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 
     // Redirigir al usuario a WhatsApp
@@ -205,7 +205,7 @@ function sendWhatsAppMessage() {
     const encodedMessage = encodeURIComponent(whatsappMessage);
 
     // Número de WhatsApp y URL
-    const phoneNumber = '+573229476426';
+    const phoneNumber = '+573214764861';
     const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 
     // Redirigir al usuario a WhatsApp
@@ -255,7 +255,7 @@ confirmarFechaBtn.addEventListener('click', () => {
             // Construye el mensaje para WhatsApp
             const mensaje = `Hola, me gustaría agendar una visita el día ${fecha} a las ${hora}.`;
             const encodedMessage = encodeURIComponent(mensaje);
-            const phoneNumber = '+573229476426'; // Número de WhatsApp
+            const phoneNumber = '+573214764861'; // Número de WhatsApp
             const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
             
             // Oculta el formulario de cita antes de redirigir
@@ -326,3 +326,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
